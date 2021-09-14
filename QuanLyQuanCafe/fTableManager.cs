@@ -50,7 +50,12 @@ namespace QuanLyQuanCafe
 
         void ShowBill(int id)
         {
+            List<BillInfo> listBillInfo = BillInfoDAO.Instance.GetListBillInfo(BillDAO.Instance.GetUncheckBillIdByTableID(id));
 
+            foreach(BillInfo item in listBillInfo)
+            {
+
+            }
         }
 
 
@@ -61,7 +66,7 @@ namespace QuanLyQuanCafe
 
         void btn_Click(object sender, EventArgs e)
         {
-            int tableID = (sender as Table).ID;
+            int tableID = ((sender as Button).Tag as Table).ID;
             ShowBill(tableID);
         }
         private void đăngXuấtToolStripMenuItem_Click(object sender, EventArgs e)
