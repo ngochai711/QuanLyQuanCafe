@@ -10,6 +10,7 @@ namespace QuanLyQuanCafe.DAO
 {
      class DataProvider
     {
+          //This hastag just using testing pull of git
         private static DataProvider instance; // Ctrl + R + E
 
         public static DataProvider Instance
