@@ -21,9 +21,30 @@ namespace QuanLyQuanCafe
             InitializeComponent();
 
             LoadTable();
+            LoadCategory();
+            
         }
 
         #region Method
+
+
+        void LoadCategory()
+        {
+            List<Category> listCategory = CategoryDAO.Instance.GetListCategory();
+            cbCategory.DataSource = listCategory;
+            cbCategory.DisplayMember = "Name";
+        }
+
+        void LoadFoodListByCategoryID(int id)
+        {
+            List<Food> listFood = FoodDAO.Instance.GetFoodByCategoryID(id);
+            cbFood.DataSource = listFood;
+            cbFood.DisplayMember = "Name";
+        }
+
+
+
+
         void LoadTable()
         {
             List<Table> tableList = TableDAO.Instance.LoadTableList();
@@ -66,8 +87,8 @@ namespace QuanLyQuanCafe
 
             }
             CultureInfo culture = new CultureInfo("vi-VN");
-            Thread.CurrentThread.CurrentCulture = culture;
-            txbTotalPrice.Text = totalPrice.ToString("c");
+            //Thread.CurrentThread.CurrentCulture = culture;
+            txbTotalPrice.Text = totalPrice.ToString("c",culture);
         }
 
 
@@ -76,9 +97,28 @@ namespace QuanLyQuanCafe
 
         #region Events
 
+        private void btnAddFood_Click(object sender, EventArgs e)
+        {
+            //Hom sau lam tiep o day
+        }
+        private void cbCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int id = 0;
+
+            ComboBox cb = sender as ComboBox;
+
+            if (cb.SelectedItem == null)
+                return;
+
+            Category selected = cb.SelectedItem as Category;
+            id = selected.ID;
+
+            LoadFoodListByCategoryID(id);
+        }
         void btn_Click(object sender, EventArgs e)
         {
             int tableID = ((sender as Button).Tag as Table).ID;
+            lsvBill.Tag = (sender as Button).Tag;
             ShowBill(tableID);
         }
         private void đăngXuấtToolStripMenuItem_Click(object sender, EventArgs e)
@@ -98,6 +138,9 @@ namespace QuanLyQuanCafe
             fAdmin f = new fAdmin();
             f.ShowDialog();
         }
+
         #endregion
+
+        
     }
 }
