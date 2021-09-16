@@ -22,7 +22,7 @@ namespace QuanLyQuanCafe
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+          //adđ
         }
 
         private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
