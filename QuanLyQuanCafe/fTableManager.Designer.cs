@@ -48,7 +48,7 @@ namespace QuanLyQuanCafe
             this.btnDiscount = new System.Windows.Forms.Button();
             this.btnCheckOut = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.nmFood = new System.Windows.Forms.NumericUpDown();
             this.btnAddFood = new System.Windows.Forms.Button();
             this.cbFood = new System.Windows.Forms.ComboBox();
             this.cbCategory = new System.Windows.Forms.ComboBox();
@@ -58,7 +58,7 @@ namespace QuanLyQuanCafe
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmDiscount)).BeginInit();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmFood)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -214,10 +214,11 @@ namespace QuanLyQuanCafe
             this.btnCheckOut.TabIndex = 4;
             this.btnCheckOut.Text = "Thanh toán";
             this.btnCheckOut.UseVisualStyleBackColor = true;
+            this.btnCheckOut.Click += new System.EventHandler(this.btnCheckOut_Click);
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.numericUpDown1);
+            this.panel4.Controls.Add(this.nmFood);
             this.panel4.Controls.Add(this.btnAddFood);
             this.panel4.Controls.Add(this.cbFood);
             this.panel4.Controls.Add(this.cbCategory);
@@ -226,18 +227,18 @@ namespace QuanLyQuanCafe
             this.panel4.Size = new System.Drawing.Size(349, 54);
             this.panel4.TabIndex = 4;
             // 
-            // numericUpDown1
+            // nmFood
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(283, 19);
-            this.numericUpDown1.Minimum = new decimal(new int[] {
+            this.nmFood.Location = new System.Drawing.Point(283, 19);
+            this.nmFood.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             -2147483648});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(49, 20);
-            this.numericUpDown1.TabIndex = 3;
-            this.numericUpDown1.Value = new decimal(new int[] {
+            this.nmFood.Name = "nmFood";
+            this.nmFood.Size = new System.Drawing.Size(49, 20);
+            this.nmFood.TabIndex = 3;
+            this.nmFood.Value = new decimal(new int[] {
             1,
             0,
             0,
@@ -299,7 +300,7 @@ namespace QuanLyQuanCafe
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmDiscount)).EndInit();
             this.panel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmFood)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -321,7 +322,7 @@ namespace QuanLyQuanCafe
         private System.Windows.Forms.Button btnDiscount;
         private System.Windows.Forms.Button btnCheckOut;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown nmFood;
         private System.Windows.Forms.Button btnAddFood;
         private System.Windows.Forms.ComboBox cbFood;
         private System.Windows.Forms.ComboBox cbCategory;

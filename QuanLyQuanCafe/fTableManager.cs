@@ -97,9 +97,30 @@ namespace QuanLyQuanCafe
 
         #region Events
 
+        void btn_Click(object sender, EventArgs e)
+        {
+            int tableID = ((sender as Button).Tag as Table).ID;
+            lsvBill.Tag = (sender as Button).Tag;
+            ShowBill(tableID);
+        }
         private void btnAddFood_Click(object sender, EventArgs e)
         {
-            //Hom sau lam tiep o day
+            Table table = lsvBill.Tag as Table;
+
+            int idBill = BillDAO.Instance.GetUncheckBillIdByTableID(table.ID);
+            int idFood = (cbFood.SelectedItem as Food).ID;
+            int count = (int)nmFood.Value;
+
+            if(idBill == -1)
+            {
+                BillDAO.Instance.InsertBill(table.ID);
+                BillInfoDAO.Instance.InsertBillInfo(BillDAO.Instance.GetMaxID(),idFood,count);
+            }
+            else
+            {
+                BillInfoDAO.Instance.InsertBillInfo(idBill, idFood, count);
+            }
+            ShowBill(table.ID);
         }
         private void cbCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -115,12 +136,7 @@ namespace QuanLyQuanCafe
 
             LoadFoodListByCategoryID(id);
         }
-        void btn_Click(object sender, EventArgs e)
-        {
-            int tableID = ((sender as Button).Tag as Table).ID;
-            lsvBill.Tag = (sender as Button).Tag;
-            ShowBill(tableID);
-        }
+        
         private void đăngXuấtToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -139,8 +155,24 @@ namespace QuanLyQuanCafe
             f.ShowDialog();
         }
 
+        private void btnCheckOut_Click(object sender, EventArgs e)
+        {
+            Table table = lsvBill.Tag as Table;
+
+            int idBill = BillDAO.Instance.GetUncheckBillIdByTableID(table.ID);
+
+            if(idBill != -1)
+            {
+                if(MessageBox.Show("Bạn có muốn thanh toán bàn " + table.Name +" không ?","Thông báo",MessageBoxButtons.OKCancel)== System.Windows.Forms.DialogResult.OK)
+                {
+                    BillDAO.Instance.CheckOut(idBill);
+                    ShowBill(table.ID);
+                }
+            }
+        }
+
         #endregion
 
-        
+
     }
 }
