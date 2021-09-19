@@ -85,20 +85,20 @@ namespace QuanLyQuanCafe
             this.thôngTinCáNhânToolStripMenuItem,
             this.đăngXuấtToolStripMenuItem});
             this.thôngTinTàiToolStripMenuItem.Name = "thôngTinTàiToolStripMenuItem";
-            this.thôngTinTàiToolStripMenuItem.Size = new System.Drawing.Size(89, 20);
-            this.thôngTinTàiToolStripMenuItem.Text = "Thông tin tài ";
+            this.thôngTinTàiToolStripMenuItem.Size = new System.Drawing.Size(122, 20);
+            this.thôngTinTàiToolStripMenuItem.Text = "Thông tin tài khoản";
             // 
             // thôngTinCáNhânToolStripMenuItem
             // 
             this.thôngTinCáNhânToolStripMenuItem.Name = "thôngTinCáNhânToolStripMenuItem";
-            this.thôngTinCáNhânToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.thôngTinCáNhânToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.thôngTinCáNhânToolStripMenuItem.Text = "Thông tin cá nhân";
             this.thôngTinCáNhânToolStripMenuItem.Click += new System.EventHandler(this.thôngTinCáNhânToolStripMenuItem_Click);
             // 
             // đăngXuấtToolStripMenuItem
             // 
             this.đăngXuấtToolStripMenuItem.Name = "đăngXuấtToolStripMenuItem";
-            this.đăngXuấtToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.đăngXuấtToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.đăngXuấtToolStripMenuItem.Text = "Đăng xuất";
             this.đăngXuấtToolStripMenuItem.Click += new System.EventHandler(this.đăngXuấtToolStripMenuItem_Click);
             // 
@@ -174,6 +174,7 @@ namespace QuanLyQuanCafe
             // 
             // cbSwitchTable
             // 
+            this.cbSwitchTable.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSwitchTable.FormattingEnabled = true;
             this.cbSwitchTable.Location = new System.Drawing.Point(0, 35);
             this.cbSwitchTable.Name = "cbSwitchTable";
@@ -188,6 +189,7 @@ namespace QuanLyQuanCafe
             this.btnSwitchTable.TabIndex = 6;
             this.btnSwitchTable.Text = "Chuyển bàn";
             this.btnSwitchTable.UseVisualStyleBackColor = true;
+            this.btnSwitchTable.Click += new System.EventHandler(this.btnSwitchTable_Click);
             // 
             // nmDiscount
             // 
@@ -256,6 +258,7 @@ namespace QuanLyQuanCafe
             // 
             // cbFood
             // 
+            this.cbFood.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbFood.FormattingEnabled = true;
             this.cbFood.Location = new System.Drawing.Point(3, 30);
             this.cbFood.Name = "cbFood";
@@ -264,6 +267,7 @@ namespace QuanLyQuanCafe
             // 
             // cbCategory
             // 
+            this.cbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCategory.FormattingEnabled = true;
             this.cbCategory.Location = new System.Drawing.Point(3, 3);
             this.cbCategory.Name = "cbCategory";

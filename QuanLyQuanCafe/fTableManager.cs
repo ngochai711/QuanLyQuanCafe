@@ -22,7 +22,7 @@ namespace QuanLyQuanCafe
 
             LoadTable();
             LoadCategory();
-            
+            LoadComboBoxTable(cbSwitchTable);
         }
 
         #region Method
@@ -47,6 +47,7 @@ namespace QuanLyQuanCafe
 
         void LoadTable()
         {
+            flpTable.Controls.Clear();
             List<Table> tableList = TableDAO.Instance.LoadTableList();
             foreach(Table item in tableList)
             {
@@ -61,13 +62,21 @@ namespace QuanLyQuanCafe
                         btn.BackColor = Color.Aqua;
                         break;
                     default:
-                        btn.BackColor = Color.LightCyan;
+                        btn.BackColor = Color.Gold;
                         break;
                 }
                 
                 flpTable.Controls.Add(btn);
 
             }
+            
+
+        }
+
+        void LoadComboBoxTable(ComboBox cb)
+        {
+            cb.DataSource = TableDAO.Instance.LoadTableList();
+            cb.DisplayMember = "Name";
 
         }
 
@@ -89,6 +98,8 @@ namespace QuanLyQuanCafe
             CultureInfo culture = new CultureInfo("vi-VN");
             //Thread.CurrentThread.CurrentCulture = culture;
             txbTotalPrice.Text = totalPrice.ToString("c",culture);
+
+            
         }
 
 
@@ -102,6 +113,7 @@ namespace QuanLyQuanCafe
             int tableID = ((sender as Button).Tag as Table).ID;
             lsvBill.Tag = (sender as Button).Tag;
             ShowBill(tableID);
+            
         }
         private void btnAddFood_Click(object sender, EventArgs e)
         {
@@ -121,6 +133,7 @@ namespace QuanLyQuanCafe
                 BillInfoDAO.Instance.InsertBillInfo(idBill, idFood, count);
             }
             ShowBill(table.ID);
+            LoadTable();
         }
         private void cbCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -160,14 +173,37 @@ namespace QuanLyQuanCafe
             Table table = lsvBill.Tag as Table;
 
             int idBill = BillDAO.Instance.GetUncheckBillIdByTableID(table.ID);
+            int discount = (int)nmDiscount.Value;
+            double totalPrice = double.Parse(txbTotalPrice.Text, NumberStyles.Currency, new CultureInfo("vi-VN"));
+            double finaltotalPrice = totalPrice - (totalPrice / 100) * discount;
 
             if(idBill != -1)
             {
-                if(MessageBox.Show("Bạn có muốn thanh toán bàn " + table.Name +" không ?","Thông báo",MessageBoxButtons.OKCancel)== System.Windows.Forms.DialogResult.OK)
+                if(MessageBox.Show(string.Format("Bạn có muốn thanh toán {0} không ?\nBàn này được giảm giá: {1}%\nTổng hóa đơn là: {2} - {2} * {1}% = {3} ",table.Name,discount,totalPrice,finaltotalPrice),"Thông báo",MessageBoxButtons.OKCancel)== System.Windows.Forms.DialogResult.OK)
                 {
-                    BillDAO.Instance.CheckOut(idBill);
+                    BillDAO.Instance. CheckOut(idBill,discount,(float)finaltotalPrice);
                     ShowBill(table.ID);
+                    LoadTable();
                 }
+            }
+            
+        }
+
+        private void btnSwitchTable_Click(object sender, EventArgs e)
+        {
+
+           
+
+
+                int id1 = (lsvBill.Tag as Table).ID;
+
+                int id2 = (cbSwitchTable.SelectedItem as Table).ID;
+
+            if (MessageBox.Show(string.Format("Bạn thực sự muốn chuyển {0} sang {1} hay không ?", (lsvBill.Tag as Table).Name, (cbSwitchTable.SelectedItem as Table).Name), "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
+            {
+                TableDAO.Instance.SwitchTable(id1, id2);
+
+                LoadTable(); 
             }
         }
 
