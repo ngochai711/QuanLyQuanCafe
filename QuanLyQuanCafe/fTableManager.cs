@@ -14,11 +14,30 @@ using QuanLyQuanCafe.DTO;
 
 namespace QuanLyQuanCafe
 {
+     
     public partial class fTableManager : Form
     {
-        public fTableManager()
+        private Account loginAccount;
+
+        public Account LoginAccount
+        {
+            get
+            {
+                return loginAccount;
+            }
+
+            set
+            {
+                loginAccount = value;
+                ChangeAccount(loginAccount.Type);
+            }
+        }
+
+        public fTableManager(Account acc)
         {
             InitializeComponent();
+
+            this.LoginAccount = acc;
 
             LoadTable();
             LoadCategory();
@@ -26,6 +45,12 @@ namespace QuanLyQuanCafe
         }
 
         #region Method
+
+        void ChangeAccount(int type)
+        {
+            adminToolStripMenuItem.Enabled = type == 1;
+            thôngTinTàiToolStripMenuItem.Text += " (" + LoginAccount.DisplayName + ")";
+        }
 
 
         void LoadCategory()
@@ -157,8 +182,14 @@ namespace QuanLyQuanCafe
 
         private void thôngTinCáNhânToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fAccountProfile f = new fAccountProfile();
+            fAccountProfile f = new fAccountProfile(LoginAccount);
+            f.UpdateAccount += f_UpdateAccount();
             f.ShowDialog();
+
+        }
+
+        void f_UpdateAccount()
+        {
 
         }
 
